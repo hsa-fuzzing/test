@@ -1,0 +1,7 @@
+<ipfixConfig>
+	<ipfixReceiverFile id="1">
+		<packetFileBasename>ipfixReceiverFile</packetFileBasename>
+		<ignoreTimestamps>true</ignoreTimestamps>
+		<offlineSpeed>-1</offlineSpeed>
+	</ipfixReceiverFile>
+</ipfixConfig>
