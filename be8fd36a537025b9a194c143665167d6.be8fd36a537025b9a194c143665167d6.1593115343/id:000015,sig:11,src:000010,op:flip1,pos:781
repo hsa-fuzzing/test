@@ -1,0 +1,46 @@
+<ipfixConfig>
+	<observer id = "1">
+		<filename>input.pcap</filename>
+		<offlineSpeed>-1.0</offlineSpeed>
+		<offlineAutoExit>true</offlineAutoExit>
+		<next>2</next>
+	</observer>
+
+	<packetQueue id="2">
+		<maxSize>10</maxSize>
+		<next>3</next>
+	</packetQueue>
+
+	<packetAggregator id="3">
+		<rule>
+			<templateId>998</templateId>
+			<flowKey><ieName>sourceIPv4Address</ieName></flowKey>
+			<flowKey><ieName>destinationIPv4Address</ieName></flowKey><nonFlowKey><ieName>octetDeltaCount</ieName></nonFlowKey>
+		</rule>
+		<expiration>
+			<inactiveTimeout unit="sec">1</inactiveTimeout>
+			<activeTimeout unit="sec">1</activeTimeout>
+		</expiration>
+		<pollInterval unit="msec">1000</pollInterval>
+		<next>4</next>
+	</packetAggregator>
+
+	<ipfixQueue id="4">
+		<maxSize>10</maxSize>
+		<next>4</next>
+	</ipfixQueue><p2pDetector id="5">
+		<analyzerid>Por</analyzerid>
+		<interval>300</interval>
+		<subnet>192.168.1.0/24</subnet>
+		<udpRateThreshold>0.013</udpRateThreshold>
+		<udpHostRateThreshold>0.</udpHostRateThreshold>
+		<tcpRateThreshold>0.082</tcpRateThreshold>
+		<coexistentTCPConsThreshold>2.9</coexistentTCPConsThreshold>
+		<rateLongTCPConsThreshold>0.018</rateLongTCPConsThreshold>
+		<tcpVarianceThreshold>0.068</tcpVarianceThreshold>
+		<failedConsPercentThreshold>4.8</failedConsPercentThreshold>
+		<tcpFailedRateThreshold>0.01</tcpFailedRateThreshold>
+		<tcpFailedVarianceThreshold>0.3</tcpFailedVarianceThreshold>
+	</p2pDetector>	
+
+</ipfixConfig>
