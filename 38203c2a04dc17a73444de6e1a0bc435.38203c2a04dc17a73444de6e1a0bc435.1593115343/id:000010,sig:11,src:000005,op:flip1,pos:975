@@ -1,0 +1,48 @@
+<ipfixConfig>
+	<observer id = "1">
+		<filename>input.pcap</filename>
+		<offlineSpeed>-1.0</offlineSpeed>
+		<offlineAutoExit>true</offlineAutoExit>
+		<next>2</next>
+	</observer>
+
+	<packetQueue id="2">
+		<maxSize>10</maxSize>
+		<next>3</next>
+	</packetQueue>
+
+	<packetAggregator id="3">
+		<rule>
+			<templateId>998</templateId>
+			<flowKey><ieName>sourceIPv4Address</ieName></flowKey>
+			<flowKey><ieName>destinationIPv4Address</ieName></flowKey><nonFlowKey><ieName>octetDeltaCount</ieName></nonFlowKey>
+		</rule>
+		<expiration>
+			<inactiveTimeout unit="sec">1</inactiveTimeout>
+			<activeTimeout unit="sec">1</activeTimeout>
+		</expiration>
+		<pollInterval unit="msec">1000</pollInterval>
+		<next>4</next>
+	</packetAggregator>
+
+	<ipfixQueue id="4">
+		<maxSize>10</maxSize>
+		<next>5</next>
+	</ipfixQueue>
+
+	<netflowV9Converter id="5">
+		<keepFlowSysUpTime>true</keepFlowSysUpTime>
+		<next>6</next>
+	</netflowV9Converter>
+
+	<ipfixQueue id="6">
+		<maxSize>10</maxSize>
+		<next>5</next>
+	</ipfixQueue>
+	
+	<ipfixNetflowExporter id="7">
+		<host>localhost</host>  <port>9995</port>
+		<maxRecordRate>500</maxRecordRate> 
+	</ipfixNetflowExporter> 
+
+</ipfixConfig>
